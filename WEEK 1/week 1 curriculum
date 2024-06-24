@@ -1,0 +1,100 @@
+Week 1: Core Python Refresh
+
+Day 1: Review Python Basics
+
+Concepts:
+Python syntax and semantics
+Variables and data types (int, float, str, bool)
+Basic operators (+, -, *, /, %, //, **)
+
+Tasks:
+Write simple Python scripts to practice these basics.
+
+Example exercises:
+Create a script to calculate the area of a circle given its radius.
+Write a program that converts Celsius to Fahrenheit.
+
+Day 2: Control Structures
+Concepts:
+Conditionals (if, elif, else)
+Loops (for, while)
+
+Tasks:
+Write programs that use control structures.
+
+Example exercises:
+Create a script that prints "Hello" 10 times.
+Write a program that finds the largest number in a list.
+
+Day 3: Functions and Modules
+Concepts:
+Defining and calling functions
+Function arguments and return values
+Importing and using modules
+
+Tasks:
+Write functions to encapsulate logic.
+
+Example exercises:
+Create a function to check if a number is prime.
+Write a script that uses the math module to perform advanced calculations.
+
+Day 4: Data Structures
+
+Concepts:
+Lists, tuples, dictionaries, sets
+Basic operations on these data structures (add, remove, access elements)
+
+Tasks:
+Write programs to manipulate data structures.
+
+Example exercises:
+Create a script to count the frequency of words in a text.
+Write a program that sorts a list of tuples based on the second element.
+
+Day 5: File Handling
+
+Concepts:
+Reading from and writing to files
+Handling file exceptions
+
+Tasks:
+Write scripts that involve file operations.
+
+Example exercises:
+Create a script to read a text file and count the number of lines.
+Write a program to log messages to a file.
+
+Day 6-7: Project - Task Manager
+
+Concepts:
+Apply the concepts learned throughout the week.
+
+Tasks:
+Task Manager Project:
+Create a command-line interface (CLI) task manager.
+
+Features to implement:
+Add a task
+Remove a task
+List all tasks
+Store tasks in a file so they persist between program runs.
+
+Steps:
+Define the functions needed: add_task, remove_task, list_tasks.
+Implement file handling to save and load tasks.
+Create a user-friendly CLI using the input() function.
+Detailed Instructions for the Task Manager Project
+Define Functions:
+
+add_task(task): Adds a task to the task list and saves it to the file.
+remove_task(task_id): Removes a task by its ID and updates the file.
+list_tasks(): Lists all tasks with their IDs.
+Implement File Handling:
+
+Use a text file (e.g., tasks.txt) to store tasks.
+Each task can be a line in the file.
+Create the CLI:
+
+Use a loop to keep the program running.
+Provide options for the user to add, remove, and list tasks.
