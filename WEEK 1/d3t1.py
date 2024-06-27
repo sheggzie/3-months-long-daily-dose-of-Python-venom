@@ -4,12 +4,12 @@ def prime(num):
     if num > 1:
         for i in range(2, num):
             if num % i == 0:
+                print(f"{num} is not a Prime number!")
                 return False
         print(f"{num} is a Prime number")
-    return "Next number please!"
+        return True
         
-
-print(prime(3))
+prime(53)
 
 
 
