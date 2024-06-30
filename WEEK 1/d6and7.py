@@ -7,6 +7,15 @@
 # Store tasks in a file so they persist between program runs.
 
 def tasker():
+    def add_task():
+        pass
+
+    def remove_task():
+        pass
+
+    def list_tasks():
+        pass
+
     end_prompt = ["end", "close", "stop", "exit", "quit"]    
     while True:    
         prompt = input("What would you like to do?: ").lower()
