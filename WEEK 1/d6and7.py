@@ -7,8 +7,9 @@
 # Store tasks in a file so they persist between program runs.
 
 def tasker():
-    def add_task():
-        pass
+    def add_task(new_task, filename="task.txt"):
+        with open(filename, "a") as file:
+            file.write(new_task + "\n")
 
     def remove_task():
         pass
@@ -23,5 +24,6 @@ def tasker():
             print("Ending loop...")
             break
         else:
+            add_task(prompt)
             print(prompt)
 tasker()
