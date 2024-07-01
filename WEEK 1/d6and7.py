@@ -8,14 +8,23 @@
 
 def tasker():
     def add_task(new_task, filename="task.txt"):
+        
+        with open(filename, "r") as file:
+            lines = file.readlines()
+                        
+        
         with open(filename, "a") as file:
-            file.write(new_task + "\n")
+            line_number = 1
+            for i in lines:
+                line_number += 1
+            file.write(str(line_number) + ": " + new_task + "\n")
 
     def remove_task():
         pass
 
     def list_tasks():
-        pass
+        with open("task.txt", "r") as file:
+            print(file.readlines())
 
     end_prompt = ["end", "close", "stop", "exit", "quit"]    
     while True:    
@@ -23,6 +32,8 @@ def tasker():
         if prompt.lower() in end_prompt:
             print("Ending loop...")
             break
+        elif prompt == "show tasks":
+            list_tasks()
         else:
             add_task(prompt)
             print(prompt)
