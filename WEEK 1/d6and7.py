@@ -10,16 +10,17 @@
 lines = ''
 def tasker():
     print("Hello! Welcome to your CLI task manager.")
-    print("Below are some helpful tips you might need!")
-    print("To add a task, just enter the task e.g 'Make coffee after exercise'")
-    print("To see your previously added available tasks, simply type 'show tasks'")
-    print("To delete a task from list, enter 'remove' or 'delete', then enter the task number/ID to delete it")
-    print("To clear the whole contents of a task, simply type 'clear tasks'")
-    print("To close or exit once you're done, simply enter 'end' or 'exit' or 'close' or 'stop' or 'quit'")
-    print("Have fun tasking :)")
-    print("Loading...")
-    print("Starting...")
-    print("Shoot!!!")    
+    print("Enter 'help' or 'guide' for help")
+    def intro():
+        print("Below are some helpful tips you might need!")
+        print("To add a task, just enter the task e.g 'Make coffee after exercise'")
+        print("To see your previously added available tasks, simply type 'show tasks'")
+        print("To delete a task from list, enter 'remove' or 'delete', then enter the task number/ID to delete it")
+        print("To clear the whole contents of a task, simply type 'clear tasks'")
+        print("To close or exit once you're done, simply enter 'end' or 'exit' or 'close' or 'stop' or 'quit'")
+        print("Enter 'help' or 'guide' to see how to run the CLI")
+        print("Have fun tasking :)")
+
     def add_task(new_task, filename="task.txt"):
         
         with open(filename, "r") as file:
@@ -86,6 +87,8 @@ def tasker():
                         break
                 except Exception as e:
                     print(f"Oops! An error '{e}' occured")
+            case "help" | "guide":
+                intro()
             case _:
                 add_task(prompt)
 tasker()
