@@ -17,10 +17,7 @@
 17: keep coding
 18: eat later
 19: don't give up
-20: send money
 21: send aza
-22: send kudi
 23: clear
 24: testing
 25: keep trying
-26: remover

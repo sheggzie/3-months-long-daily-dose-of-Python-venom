@@ -23,20 +23,26 @@ def tasker():
                 line_number += 1
             file.write(str(line_number) + ": " + new_task + "\n")
 
-    def remove_task(out):        
-        with open("task.txt", "r") as file:
-            lines = file.readlines()
-            current_line = file.readline([out])
-            print(current_line)
-            
-        # with open("task.txt", "w") as file:
-        #     for line in lines:
-        #         if line_number != out:
-        #             file.write(str(line_number) + ": " + line + "\n")
+    def remove_task(item):  
+        try:      
+            with open("task.txt", "r") as file:
+                lines = file.readlines()
+                
+            if item < 1:
+                print(f"{item} is an invalid number, enter a number greater than or equal to 1")
+            elif item > len(lines):
+                print(f"Items in task is not up to {item}. Available items is {len(lines)}")
+            elif item is type(str):
+                print("Texts not supported! Please enter a number.")
+                return
+                
+            del lines[item-1]
 
-
-
-    
+            with open("task.txt", 'w') as file:
+                file.writelines(lines)
+            print(f"Line number {item} has been deleted successfully!")
+        except Exception as e:
+            print(f"Oops! There was an error '{e}'!")
 
     def list_tasks():
         with open("task.txt", "r") as file:
@@ -50,12 +56,9 @@ def tasker():
             break
         elif prompt == "show tasks":
             list_tasks()
-        elif prompt == "remove":
-            ask = str(input("Enter the line number to be deleted: "))
+        elif prompt == "remove" or "Remove" or "delete" or "Delete":
+            ask = int(input("Enter the line number to be deleted: "))
             remove_task(ask)
-            # if ask in line_number:                
-                # remove_task(ask)
-                # print(type(line_number))
         else:
             add_task(prompt)
             print(prompt)
