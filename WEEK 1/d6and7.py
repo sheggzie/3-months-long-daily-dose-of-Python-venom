@@ -7,7 +7,6 @@
 # Clear saved tasks
 # Store tasks in a file so they persist between program runs.
 
-lines = ''
 def tasker():
     print("Hello! Welcome to your CLI task manager.")
     print("Enter 'help' or 'guide' for help")
@@ -21,45 +20,56 @@ def tasker():
         print("Enter 'help' or 'guide' to see how to run the CLI")
         print("Have fun tasking :)")
 
-    def add_task(new_task, filename="task.txt"):
-        
+    def add_task(new_task, filename="task.txt"):        
         with open(filename, "r") as file:
             global lines
-            lines = file.readlines()
-                        
+            lines = file.readlines()                        
         
         with open(filename, "a") as file:
-            file.write(new_task + "\n")
-        
+            file.write(new_task + "\n")        
         print(f"New task '{new_task}' has been added to your task list")
 
-    def remove_task(item):  
+    def remove_task(item, filename="task.txt"):  
         try:      
-            with open("task.txt", "r") as file:
+            with open(filename, "r") as file:
                 lines = file.readlines()
 
             if item < 1:
                 print(f"{item} is an invalid number, enter a number greater than or equal to 1")
+                return
             elif item > len(lines):
                 print(f"Items in task is not up to {item}. Available items is {len(lines)}")
+                return
             elif item is type(str):
                 print("Texts not supported! Please enter a number.")
                 return
                 
             del lines[item-1]
 
-            with open("task.txt", 'w') as file:
+            with open(filename, 'w') as file:
                 file.writelines(lines)
-            print(f"Line number {item} has been deleted successfully!")
+            print(f"Task with line number {item} has been deleted successfully!")
+        except FileNotFoundError:
+            print(f"The file {filename} does not exist")
         except Exception as e:
             print(f"Oops! There was an error '{e}'!")
 
-    def list_tasks():
-        with open("task.txt", "r") as file:
-            print(file.readlines())
+    def list_tasks(filename="task.txt"):
+        try:
+            with open(filename, "r") as file:
+                lines = file.readlines()
+                if lines:
+                    print("Here are your tasks: ")
+                    for id, line in enumerate(lines, start=1):
+                        print(f"{id}: {line.strip()}")
+                else:
+                    print("No tasks found.")
+        except FileNotFoundError:
+            print(f"File {filename} does not exist.")
 
-    def clear_tasks():
-        with open("task.txt", "w") as file:
+
+    def clear_tasks(filename="task.txt"):
+        with open(filename, "w") as file:
             file.truncate()
     
     while True:        
@@ -74,6 +84,8 @@ def tasker():
                 try:
                     ask = int(input("Enter the line number to be deleted: "))
                     remove_task(ask)
+                except ValueError:
+                    print("Invalid input. Please enter a valid number")
                 except Exception as e:
                     print(f"Oops! There was an error '{e}'")
             case "clear tasks":
@@ -90,5 +102,8 @@ def tasker():
             case "help" | "guide":
                 intro()
             case _:
-                add_task(prompt)
+                if prompt.strip():
+                    add_task(prompt)
+                else:
+                    print("Invalid input. Please enter a task or a valid command.")
 tasker()
