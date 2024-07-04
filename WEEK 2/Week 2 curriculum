@@ -1,0 +1,98 @@
+Great job on completing Week 1! Let's move on to Week 2, where we'll focus on data structures and file handling.
+
+
+Week 2: Data Structures and File Handling
+
+Day 1: Lists and Tuples
+Concepts:
+Lists: creation, indexing, slicing, methods (append, remove, etc.)
+Tuples: creation, immutability, usage
+
+Tasks:
+Write scripts to practice list and tuple operations.
+
+Example exercises:
+Create a list of numbers and perform various operations: add, remove, sort, reverse.
+Create a tuple with different data types and access its elements.
+
+Day 2: Dictionaries and Sets
+Concepts:
+Dictionaries: creation, accessing, adding, and removing elements, methods (keys, values, items)
+Sets: creation, adding, and removing elements, set operations (union, intersection, difference)
+
+Tasks:
+Write scripts to practice dictionary and set operations.
+
+Example exercises:
+Create a dictionary of student names and their scores, and perform various operations.
+Create a set of unique words from a list of words and perform set operations.
+
+Day 3: File Handling Basics
+Concepts:
+Reading from and writing to text files
+Handling exceptions related to file operations
+
+Tasks:
+Write scripts to practice file reading and writing.
+
+Example exercises:
+Create a script that reads a text file and prints its contents.
+Write a program that writes user input to a file.
+
+Day 4: Advanced File Handling
+Concepts:
+Working with different file modes (read, write, append)
+Reading and writing CSV files using the csv module
+
+Tasks:
+Write scripts to practice advanced file handling.
+
+Example exercises:
+Create a script that appends text to an existing file.
+Write a program that reads data from a CSV file and processes it.
+
+Day 5: Combining Data Structures and File Handling
+Concepts:
+Combining knowledge of data structures and file handling
+Practical applications and use cases
+
+Tasks:
+Write scripts that integrate data structures and file handling.
+
+Example exercises:
+Create a script that reads a file of student names and scores, stores them in a dictionary, and performs various operations.
+Write a program that reads a CSV file of product information and stores it in a list of dictionaries.
+
+Day 6-7: Project - Book Catalog
+Concepts:
+Apply the concepts learned throughout the week.
+
+Tasks:
+Book Catalog Project:
+Create a command-line interface (CLI) book catalog.
+Features to implement:
+Add a book (title, author, year)
+Remove a book
+Search for a book by title or author
+List all books
+Store books in a file so they persist between program runs.
+
+Steps:
+Define the functions needed: add_book, remove_book, search_books, list_books.
+Implement file handling to save and load books.
+Create a user-friendly CLI using the input() function.
+Detailed Instructions for the Book Catalog Project
+Define Functions:
+
+add_book(book): Adds a book to the book catalog and saves it to the file.
+remove_book(title): Removes a book by its title and updates the file.
+search_books(query): Searches for books by title or author.
+list_books(): Lists all books in the catalog.
+Implement File Handling:
+
+Use a text file (e.g., books.txt) to store books.
+Each book can be a line in the file with fields separated by a delimiter (e.g., comma).
+Create the CLI:
+
+Use a loop to keep the program running.
+Provide options for the user to add, remove, search, and list books.
