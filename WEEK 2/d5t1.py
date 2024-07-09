@@ -31,7 +31,13 @@ def get_top_scorer():
     for key, value in students.items():
         if value == top_scorer:
             print(f"The student with the highest score is {key} with score {top_scorer}")
-            return key       
+            return key  
+
+def get_average_score():
+    sum_total = sum(students.values())
+    num_count = len(students.items()) 
+    avg = sum_total/num_count
+    print(f"The average score among the students is {int(avg)}")   
     
 
 def save_records(filename, students):
@@ -39,8 +45,7 @@ def save_records(filename, students):
         writer = csv.writer(file)
         for name, score in students.items():
             writer.writerow([name, score])
-
-
+            
 
 def main():
     students = records(filename)
@@ -48,6 +53,7 @@ def main():
         print("Enter 1 to add record.")
         print("Enter 2 to remove a student record.")
         print("Enter 3 to see the top scoring student.")
+        print("Enter 4 to check average student score.")
         print("Enter x to exit.")
         prompt = input("What do you want to do? ")
         if prompt == "1":
@@ -59,6 +65,8 @@ def main():
             remove_student(students, ask)
         elif prompt == "3":
             get_top_scorer()
+        elif prompt == "4":
+            get_average_score()
         elif prompt == "x":
             save_records(filename, students)
             break
