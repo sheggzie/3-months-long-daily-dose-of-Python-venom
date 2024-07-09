@@ -4,3 +4,4 @@ wizzy,89
 presh,88
 sam,88
 gprof,89
+kenny,97

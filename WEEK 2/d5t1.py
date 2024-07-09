@@ -26,6 +26,14 @@ def remove_student(students, name):
     else:
         print("Students record not found!")
 
+def get_top_scorer():
+    top_scorer = max(students.values())
+    for key, value in students.items():
+        if value == top_scorer:
+            print(f"The student with the highest score is {key} with score {top_scorer}")
+            return key       
+    
+
 def save_records(filename, students):
     with open(filename, "w", newline="") as file:
         writer = csv.writer(file)
@@ -39,6 +47,7 @@ def main():
     while True:
         print("Enter 1 to add record.")
         print("Enter 2 to remove a student record.")
+        print("Enter 3 to see the top scoring student.")
         print("Enter x to exit.")
         prompt = input("What do you want to do? ")
         if prompt == "1":
@@ -48,8 +57,9 @@ def main():
         elif prompt == "2":
             ask = input("Enter name of Student to remove: ")
             remove_student(students, ask)
+        elif prompt == "3":
+            get_top_scorer()
         elif prompt == "x":
             save_records(filename, students)
             break
-
 main()
