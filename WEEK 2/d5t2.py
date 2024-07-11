@@ -2,19 +2,11 @@
 import csv
 
 
-# brands = {
-#     "brand": "apple",
-#     "model": "iPhone 15",
-#     "color": "black"
-# }
-
 def read_to_dict(filename="product info.csv"):
     brands = {}
     with open(filename, "r") as file:
-        # rows = csv.reader(file)
-        # for brand, model, color in rows:
-        #     brands.update(brand)
+        rows = csv.reader(file)
+        for model, color in rows:
+            brands[model] = color
     print(brands)
-
-read_to_dict()
-        
+read_to_dict()        
