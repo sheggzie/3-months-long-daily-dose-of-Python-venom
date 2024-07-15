@@ -16,3 +16,17 @@ def booker():
 
     def list_books():
         pass
+
+
+    while True:
+        prompt = input("Enter a prompt: ")
+        match prompt:
+            case "add book":
+                add_book()
+            case "remove book":
+                remove_book()
+            case "list books":
+                list_books()
+            case "exit" | "close" | "quit":
+                break
+booker()
