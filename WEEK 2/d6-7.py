@@ -7,10 +7,24 @@
 # List all books
 # Store books in a file so they persist between program runs.
 
+import csv
+
+filename = "books.csv"
+
+with open(filename, "w") as file:
+    line = csv.writer(file)
+    line.writerow(["title", "author", "year"])
+
+
 def booker():
     def add_book():
-        pass
-
+        title = input("Enter the book Title: ")
+        author = input("Enter the book Author: ")
+        year = input("Enter the Year the book was published: ")
+        with open(filename, "a", newline="") as file:
+            lines = csv.writer(file)
+            lines.writerow([title, author, year])                
+        
     def remove_book():
         pass
 
