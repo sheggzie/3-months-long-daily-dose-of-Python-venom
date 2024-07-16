@@ -11,22 +11,37 @@ import csv
 
 filename = "books.csv"
 
-with open(filename, "w") as file:
-    line = csv.writer(file)
-    line.writerow(["title", "author", "year"])
-
-
 def booker():
     def add_book():
         title = input("Enter the book Title: ")
         author = input("Enter the book Author: ")
         year = input("Enter the Year the book was published: ")
+
         with open(filename, "a", newline="") as file:
             lines = csv.writer(file)
             lines.writerow([title, author, year])                
         
     def remove_book():
-        pass
+        prompt = input("Enter the title of the book to remove: ")
+        found = False
+
+        with open(filename, "r", newline="") as file:
+            lines = csv.reader(file)
+            rows = list(lines)
+
+        for i, row in enumerate(rows):
+            if row[0] == prompt:
+                found = True
+                del rows[i]
+                break
+
+        if not found:
+            print(f"Book titled {prompt} is not found!")
+        else:
+            with open(filename, "w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerows(rows)
+            print(f"Book titled '{prompt}' has been removed successfully.")
 
     def list_books():
         pass
