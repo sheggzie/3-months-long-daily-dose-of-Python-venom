@@ -44,7 +44,12 @@ def booker():
             print(f"Book titled '{prompt}' has been removed successfully.")
 
     def list_books():
-        pass
+        with open(filename, "r") as file:
+            lines = csv.reader(file)
+            for title, author, year in lines:
+                print("title: ", title)
+                print("author: ", author)
+                print("year: ", year + "\n")
 
 
     while True:
@@ -56,6 +61,6 @@ def booker():
                 remove_book()
             case "list books":
                 list_books()
-            case "exit" | "close" | "quit":
+            case "exit" | "close" | "quit" | "end":
                 break
 booker()
