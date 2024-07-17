@@ -11,7 +11,17 @@ import csv
 
 filename = "books.csv"
 
-def booker():
+def booker():    
+    print("WELCOME TO THE BOOK MANAGER!")
+    print("Enter 'i' to get info on prompts to run the program." + '\n')
+
+    def show_info():
+        print("1. 'add book' to add book.")
+        print("2. 'remove book' to remove book.")
+        print("3. 'list books' to show available books.")
+        print("4. 'query book' to search a book.")
+        print("5. 'exit' | 'close' | 'quit' | 'end' when done to exit!" + '\n')
+
     def add_book():
         title = input("Enter the book Title: ")
         author = input("Enter the book Author: ")
@@ -66,8 +76,10 @@ def booker():
 
 
     while True:
-        prompt = input("Enter a prompt: ")
+        prompt = input("Enter a prompt: ").strip().lower()
         match prompt:
+            case 'i':
+                show_info()
             case "add book":
                 add_book()
             case "remove book":
@@ -78,4 +90,6 @@ def booker():
                 search_book()
             case "exit" | "close" | "quit" | "end":
                 break
+            case _:
+                print("Error! Enter a valid prompt!")
 booker()
