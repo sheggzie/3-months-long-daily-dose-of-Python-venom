@@ -79,10 +79,19 @@ def booker():
     def list_books():
         with open(filename, "r") as file:
             lines = csv.reader(file)
-            for title, author, year in lines:
-                print("title: ", title)
-                print("author: ", author)
-                print("year: ", year + "\n")
+            books = list(lines)
+
+        if not books:
+            print("No book found!")
+            return
+        
+        print("="*65)
+        print(f"{'TITLE':<30}{'AUTHOR':<30}{'YEAR':<5}" + "\n")
+        for title, author, year in books:
+            print(f"{title:<30}{author:<30}{year:<5}")
+        print("="*65 + "\n")
+        
+        
 
 
     while True:
@@ -99,6 +108,7 @@ def booker():
             case "query book":
                 search_book()
             case "exit" | "close" | "quit" | "end":
+                print("Exiting Book Manager...")
                 break
             case _:
                 print("Error! Enter a valid prompt!")
