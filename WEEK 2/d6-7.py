@@ -23,13 +23,18 @@ def booker():
         print("5. 'exit' | 'close' | 'quit' | 'end' when done to exit!" + '\n')
 
     def add_book():
-        title = input("Enter the book Title: ")
-        author = input("Enter the book Author: ")
-        year = input("Enter the Year the book was published: ")
+        title = input("Enter the book Title: ").strip()
+        author = input("Enter the book Author: ").strip()
+        year = input("Enter the Year the book was published: ").strip()
+
+        if not year.isdigit():
+            print("Error! Year must be a number.")
+            return
 
         with open(filename, "a", newline="") as file:
             lines = csv.writer(file)
-            lines.writerow([title, author, year])                
+            lines.writerow([title, author, year])
+        print(f"Book '{title}' by {author} added succesfully.")                
         
     def remove_book():
         prompt = input("Enter the title of the book to remove: ")
