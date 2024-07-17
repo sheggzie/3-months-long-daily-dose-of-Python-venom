@@ -37,7 +37,7 @@ def booker():
         print(f"Book '{title}' by {author} added succesfully.")                
         
     def remove_book():
-        prompt = input("Enter the title of the book to remove: ")
+        prompt = input("Enter the title of the book to remove: ").strip().lower()
         found = False
 
         with open(filename, "r", newline="") as file:
@@ -59,17 +59,22 @@ def booker():
             print(f"Book titled '{prompt}' has been removed successfully.")
 
     def search_book():
-        prompt = input("Enter the title of the book to check: ")
+        prompt = input("Enter the title or author of the book to check: ").strip().lower()
+        found = False
+
         with open(filename, "r") as file:
             lines = csv.reader(file)
-            rows = list(lines)
 
-            for i, row in enumerate(rows):
-                if row[0] == prompt:
-                    print("Check the details of your search below: ") 
+            for row in lines:
+                if prompt in row[0].lower() or prompt in row[1].lower():
+                    print("Book found, check below for details:") 
                     print(f"Title: {row[0]}")
                     print(f"Author: {row[1]}")
-                    print(f"Year: {row[2]}", "\n")  
+                    print(f"Year: {row[2]}", "\n")
+                    found = True
+            
+            if not found:
+                print(f"No book with title and author '{prompt}' found!")
 
     def list_books():
         with open(filename, "r") as file:
