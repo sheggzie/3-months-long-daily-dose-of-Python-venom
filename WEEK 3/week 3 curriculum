@@ -1,0 +1,103 @@
+Great job on completing Week 2! Let's move on to Week 3, where we'll focus on error handling and object-oriented programming (OOP).
+
+Week 3: Error Handling and Object-Oriented Programming (OOP)
+
+
+Day 1: Error Handling Basics
+
+Concepts:
+Exception handling with try, except, finally
+Raising exceptions using raise
+
+Tasks:
+Write scripts to practice exception handling.
+Example exercises:
+Create a script that handles division by zero errors.
+Write a program that prompts the user for a number and raises an exception if the input is not a number.
+
+
+Day 2: Advanced Error Handling
+
+Concepts:
+Custom exceptions
+Using else with try and except
+
+Tasks:
+Write scripts to practice advanced error handling.
+Example exercises:
+Create a custom exception for invalid user input.
+Write a program that reads from a file and handles exceptions for file not found and other I/O errors.
+
+
+Day 3: Introduction to Object-Oriented Programming (OOP)
+
+Concepts:
+Classes and objects
+Attributes and methods
+__init__ method
+
+Tasks:
+Write scripts to practice creating classes and objects.
+Example exercises:
+Create a Person class with attributes for name and age, and methods to display the person's information.
+Write a program that creates multiple Person objects and displays their information.
+
+
+Day 4: Advanced OOP Concepts
+
+Concepts:
+Inheritance
+Polymorphism
+Encapsulation
+
+Tasks:
+Write scripts to practice advanced OOP concepts.
+Example exercises:
+Create a Student class that inherits from the Person class and adds additional attributes and methods.
+Write a program that demonstrates method overriding and polymorphism.
+
+
+Day 5: Working with Multiple Classes
+
+Concepts:
+Relationships between classes (association, aggregation, composition)
+Creating and managing multiple classes
+
+Tasks:
+Write scripts to practice working with multiple classes.
+Example exercises:
+Create a Course class and a Student class, where a Course can have multiple Student objects.
+Write a program that manages courses and students, allowing the addition of students to courses and displaying course information.
+
+
+Day 6-7: Project - Bank Account System
+Concepts:
+Apply the concepts learned throughout the week.
+Tasks:
+Bank Account System Project:
+Create a class-based bank account system.
+Features to implement:
+Create accounts (savings and checking)
+Deposit and withdraw money
+Transfer money between accounts
+Display account details
+Steps:
+Define the base class BankAccount with common attributes and methods.
+Create subclasses SavingsAccount and CheckingAccount with specific attributes and methods.
+Implement methods for depositing, withdrawing, transferring money, and displaying account details.
+Create a user-friendly CLI to manage bank accounts.
+Detailed Instructions for the Bank Account System Project
+Define Base Class:
+
+BankAccount class with common attributes like account_number, balance, and methods like deposit, withdraw, and display.
+Create Subclasses:
+
+SavingsAccount class with specific attributes like interest_rate.
+CheckingAccount class with specific attributes like overdraft_limit.
+Implement Methods:
+
+Methods for depositing, withdrawing, transferring money, and displaying account details.
+Create the CLI:
+
+Use a loop to keep the program running.
+Provide options for the user to create accounts, deposit, withdraw, transfer money, and display account details.
