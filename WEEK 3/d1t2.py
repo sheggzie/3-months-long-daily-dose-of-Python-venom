@@ -6,5 +6,9 @@ def prompter():
         prompt = int(input("Enter a number: "))
         return prompt
     except ValueError:
-        print("Error! Input has to be a number")
-print(prompter())
+        raise ValueError("Error! Input has to be a number")
+    
+try:
+    print(prompter())
+except ValueError as e:
+    print(e)
