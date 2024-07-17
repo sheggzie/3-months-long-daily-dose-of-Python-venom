@@ -43,6 +43,19 @@ def booker():
                 writer.writerows(rows)
             print(f"Book titled '{prompt}' has been removed successfully.")
 
+    def search_book():
+        prompt = input("Enter the title of the book to check: ")
+        with open(filename, "r") as file:
+            lines = csv.reader(file)
+            rows = list(lines)
+
+            for i, row in enumerate(rows):
+                if row[0] == prompt:
+                    print("Check the details of your search below: ") 
+                    print(f"Title: {row[0]}")
+                    print(f"Author: {row[1]}")
+                    print(f"Year: {row[2]}", "\n")  
+
     def list_books():
         with open(filename, "r") as file:
             lines = csv.reader(file)
@@ -61,6 +74,8 @@ def booker():
                 remove_book()
             case "list books":
                 list_books()
+            case "query book":
+                search_book()
             case "exit" | "close" | "quit" | "end":
                 break
 booker()
