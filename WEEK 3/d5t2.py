@@ -5,6 +5,13 @@ class Manager:
     def __init__(self):
         self.student_name = []
         self.student_id = []
+        self.course_entry = {
+            "Biology":[],
+            "Mathematics": [],
+            "English": [],
+            "Physics": [],
+            "Chemistry": []
+        }
         self.course = {
             "Biology": 112,
             "Mathematics": 113,
@@ -20,6 +27,7 @@ class Manager:
         
         self.student_name.append(name)
         self.student_id.append(id)
+        self.course_entry[coursename].append(name)
         print(f"{name} with Student ID: {id} has been registered for Course: {coursename} with Coursecode: {self.course[coursename]}")
 
     def display_courses(self):
@@ -27,6 +35,12 @@ class Manager:
         for course, code in self.course.items():
             print(f"{course:<20}{code:>20}")
         print("="*40)
+
+    def course_info(self):
+        print("="*30)
+        for course, students in self.course_entry.items():
+            print(f"{course:<15}{len(students):>15}")
+        print("="*30)
             
 manage = Manager()
 while True:
@@ -34,9 +48,11 @@ while True:
     match prompt:
         case "add student":
             manage.add_student()
-        case "list students":
-            pass
         case "list courses":
             manage.display_courses()
+        case "registered course":
+            manage.course_info()
         case "end" | "close" | "quit":
             break
+        case _:
+            print("Error! Enter a valid prompt!")
