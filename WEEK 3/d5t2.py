@@ -22,6 +22,12 @@ class Manager:
         self.student_id.append(id)
         print(f"{name} with Student ID: {id} has been registered for Course: {coursename} with Coursecode: {self.course[coursename]}")
 
+    def display_courses(self):
+        print("="*40)
+        for course, code in self.course.items():
+            print(f"{course:<20}{code:>20}")
+        print("="*40)
+            
 manage = Manager()
 while True:
     prompt = input("Enter a prompt: ")
@@ -31,6 +37,6 @@ while True:
         case "list students":
             pass
         case "list courses":
-            pass
+            manage.display_courses()
         case "end" | "close" | "quit":
             break
