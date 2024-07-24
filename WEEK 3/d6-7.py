@@ -12,8 +12,7 @@ class BankAccount:
     def __init__(self):
         self.AccountType = ''
         self.AccountBalance = 0
-        self.AccountName = ''
-
+        
     def create_account(self):
         print("What type of account do you want to create? ")
         print("Enter A for Savings account")
@@ -35,10 +34,19 @@ class BankAccount:
         print(f"Hello {self.name}, your account with number: {self.acctnum} has been created successfully!")
     
     def deposit(self):
-        print(f"Hello, how much do you want to deposit?")
+        print(f"Hello {self.name}, how much do you want to deposit?")
         prompt = int(input("Enter amount: "))
         self.AccountBalance += prompt
         print(f"{prompt} deposited. Your new balance is {self.AccountBalance}")
+
+    def withdraw(self):
+        print(f"Hello {self.name}, how much do you want to withdraw?")
+        prompt = int(input("Enter amount: "))
+        if self.AccountBalance == 0 or self.AccountBalance < prompt:
+            print("Insufficient funds!")
+        else:
+            self.AccountBalance -= prompt
+        print(f"{prompt} withdrawn. Your new balance is {self.AccountBalance}")
 
 
 newact = BankAccount()
@@ -51,7 +59,7 @@ while True:
         case "deposit":
             newact.deposit()
         case "withdraw":
-            pass
+            newact.withdraw()
         case "end" | "close" | "quit":
             break
         case _:
