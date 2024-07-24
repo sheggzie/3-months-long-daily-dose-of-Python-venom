@@ -11,6 +11,8 @@ import random
 class BankAccount:
     def __init__(self):
         self.AccountType = ''
+        self.AccountBalance = 0
+        self.AccountName = ''
 
     def create_account(self):
         print("What type of account do you want to create? ")
@@ -31,6 +33,26 @@ class BankAccount:
         self.acctnum = random.randint(1000000000, 9999999999)
 
         print(f"Hello {self.name}, your account with number: {self.acctnum} has been created successfully!")
+    
+    def deposit(self):
+        print(f"Hello, how much do you want to deposit?")
+        prompt = int(input("Enter amount: "))
+        self.AccountBalance += prompt
+        print(f"{prompt} deposited. Your new balance is {self.AccountBalance}")
+
 
 newact = BankAccount()
-newact.create_account()
+
+while True:
+    prompt = input("Enter a prompt: ")
+    match prompt:
+        case "create account":
+            newact.create_account()
+        case "deposit":
+            newact.deposit()
+        case "withdraw":
+            pass
+        case "end" | "close" | "quit":
+            break
+        case _:
+            print("Error! Enter a valid prompt.")
