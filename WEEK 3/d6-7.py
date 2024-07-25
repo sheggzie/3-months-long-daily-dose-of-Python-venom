@@ -1,19 +1,48 @@
-# Bank Account System Project:
-# Create a class-based bank account system.
-# Features to implement:
-# Create accounts (savings and checking)
-# Deposit and withdraw money
-# Transfer money between accounts
-# Display account details
+# # Bank Account System Project:
+# # Create a class-based bank account system.
+# # Features to implement:
+# # Create accounts (savings and checking)
+# # Deposit and withdraw money
+# # Transfer money between accounts
+# # Display account details
 
-import random, csv
+import random
+import csv
 
 filename = "database.csv"
+
+print("Welcome to the S-Bank")
 
 class BankAccount:
     def __init__(self):
         self.AccountType = ''
         self.AccountBalance = 0
+        self.name = ''
+        self.acctnum = None
+
+    def login(self):
+        print("A: create account")
+        print("B: login")
+        prompt = input("Enter an option: ").capitalize()
+        if prompt == "B":
+            ask = input("Enter your account number: ").strip()
+            with open(filename, "r") as file:
+                read = csv.reader(file)
+                for row in read:
+                    if row[1] == ask:
+                        self.name = row[0]
+                        self.acctnum = int(row[1])
+                        self.AccountBalance = int(row[2])
+                        self.AccountType = row[3]
+                        print(f"Hi {self.name}, Welcome to S-Bank!")
+                        return True
+                print("Account not found!")
+                return False
+        elif prompt == "A":
+            return "create account"
+        else:
+            print("Invalid option.")
+            return False
 
     def create_account(self):
         print("What type of account do you want to create? ")
@@ -27,7 +56,9 @@ class BankAccount:
         elif prompt == "B":
             self.AccountType = "Checking"
         else:
-            print("Error! Enter a valid input.")        
+            print("Error! Enter a valid input.")
+            return
+        
         print(f"{self.AccountType} account selected!")
         
         self.name = input("Enter your name: ")
@@ -47,7 +78,7 @@ class BankAccount:
         rows = []
         with open(filename, "r", newline="") as file:
             reader = csv.reader(file)
-            for row in reader:                
+            for row in reader:
                 if int(row[1]) == self.acctnum:
                     row[2] = str(self.AccountBalance)
                 rows.append(row)
@@ -69,7 +100,7 @@ class BankAccount:
         rows = []
         with open(filename, "r", newline="") as file:
             reader = csv.reader(file)
-            for row in reader:                
+            for row in reader:
                 if int(row[1]) == self.acctnum:
                     row[2] = str(self.AccountBalance)
                 rows.append(row)
@@ -83,15 +114,17 @@ class BankAccount:
 newact = BankAccount()
 
 while True:
-    prompt = input("Enter a prompt: ")
-    match prompt:
-        case "create account":
-            newact.create_account()
-        case "deposit":
-            newact.deposit()
-        case "withdraw":
-            newact.withdraw()
-        case "end" | "close" | "quit":
-            break
-        case _:
-            print("Error! Enter a valid prompt.")
+    action = newact.login()
+    if action == "create account":
+        newact.create_account()
+    elif action:
+        prompt = input("Enter a prompt: ").lower()
+        match prompt:
+            case "deposit":
+                newact.deposit()
+            case "withdraw":
+                newact.withdraw()
+            case "end" | "close" | "quit":
+                break
+            case _:
+                print("Error! Enter a valid prompt.")
