@@ -6,13 +6,15 @@
 # Transfer money between accounts
 # Display account details
 
-import random
+import random, csv
+
+filename = "database.csv"
 
 class BankAccount:
     def __init__(self):
         self.AccountType = ''
         self.AccountBalance = 0
-        
+
     def create_account(self):
         print("What type of account do you want to create? ")
         print("Enter A for Savings account")
@@ -31,12 +33,29 @@ class BankAccount:
         self.name = input("Enter your name: ")
         self.acctnum = random.randint(1000000000, 9999999999)
 
+        with open(filename, "a", newline="") as file:
+            db = csv.writer(file)
+            db.writerow([self.name, self.acctnum, self.AccountBalance, self.AccountType])
+
         print(f"Hello {self.name}, your account with number: {self.acctnum} has been created successfully!")
     
     def deposit(self):
         print(f"Hello {self.name}, how much do you want to deposit?")
         prompt = int(input("Enter amount: "))
         self.AccountBalance += prompt
+        
+        rows = []
+        with open(filename, "r", newline="") as file:
+            reader = csv.reader(file)
+            for row in reader:                
+                if int(row[1]) == (self.acctnum):
+                    row[2] = str(self.AccountBalance)
+                rows.append(row)
+        
+        with open(filename, "w", newline="") as file:
+            db = csv.writer(file)
+            db.writerows(rows)
+
         print(f"{prompt} deposited. Your new balance is {self.AccountBalance}")
 
     def withdraw(self):
