@@ -48,7 +48,7 @@ class BankAccount:
         with open(filename, "r", newline="") as file:
             reader = csv.reader(file)
             for row in reader:                
-                if int(row[1]) == (self.acctnum):
+                if int(row[1]) == self.acctnum:
                     row[2] = str(self.AccountBalance)
                 rows.append(row)
         
@@ -65,8 +65,20 @@ class BankAccount:
             print("Insufficient funds!")
         else:
             self.AccountBalance -= prompt
-        print(f"{prompt} withdrawn. Your new balance is {self.AccountBalance}")
+                    
+        rows = []
+        with open(filename, "r", newline="") as file:
+            reader = csv.reader(file)
+            for row in reader:                
+                if int(row[1]) == self.acctnum:
+                    row[2] = str(self.AccountBalance)
+                rows.append(row)
+        
+        with open(filename, "w", newline="") as file:
+            db = csv.writer(file)
+            db.writerows(rows)
 
+        print(f"{prompt} withdrawn. Your new balance is {self.AccountBalance}")
 
 newact = BankAccount()
 
