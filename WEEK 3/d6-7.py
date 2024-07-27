@@ -1,10 +1,10 @@
-# # Bank Account System Project:
-# # Create a class-based bank account system.
-# # Features to implement:
-# # Create accounts (savings and checking)
-# # Deposit and withdraw money
-# # Transfer money between accounts
-# # Display account details
+# Bank Account System Project:
+# Create a class-based bank account system.
+# Features to implement:
+# Create accounts (savings and checking)
+# Deposit and withdraw money
+# Transfer money between accounts
+# Display account details
 
 import random
 import csv
@@ -23,6 +23,7 @@ class BankAccount:
     def login(self):
         print("A: create account")
         print("B: login")
+        print("C: exit")
         prompt = input("Enter an option: ").capitalize()
         if prompt == "B":
             ask = input("Enter your account number: ").strip()
@@ -40,6 +41,9 @@ class BankAccount:
                 return False
         elif prompt == "A":
             return "create account"
+        elif prompt == "C":
+            print("Bye")
+            return None
         else:
             print("Invalid option.")
             return False
@@ -111,12 +115,47 @@ class BankAccount:
 
         print(f"{prompt} withdrawn. Your new balance is {self.AccountBalance}")
 
+    def send_funds(self):
+        beneficiary = input("Enter beneficiary's account number: ").strip()
+        amount = int(input("Enter amount to send: "))
+
+        if self.AccountBalance < amount or self.AccountBalance == 0:
+            print("Insufficient funds!")
+            return
+
+        beneficiary_found = False
+        rows = []
+
+        with open(filename, "r", newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if row[1] == beneficiary:
+                    row[2] = str(int(row[2]) + amount)  # Add amount to beneficiary's balance
+                    beneficiary_found = True
+                elif row[1] == str(self.acctnum):
+                    row[2] = str(int(row[2]) - amount)  # Deduct amount from sender's balance
+                rows.append(row)
+
+        if not beneficiary_found:
+            print("Beneficiary account not found!")
+            return
+
+        with open(filename, "w", newline="") as file:
+            db = csv.writer(file)
+            db.writerows(rows)
+
+        self.AccountBalance -= amount
+        print(f"{amount} sent to account {beneficiary}. Your new balance is {self.AccountBalance}")
+
+
 newact = BankAccount()
 
 while True:
     action = newact.login()
     if action == "create account":
         newact.create_account()
+    elif action == None:
+        break
     elif action:
         prompt = input("Enter a prompt: ").lower()
         match prompt:
@@ -124,6 +163,8 @@ while True:
                 newact.deposit()
             case "withdraw":
                 newact.withdraw()
+            case "send":
+                newact.send_funds()
             case "end" | "close" | "quit":
                 break
             case _:
