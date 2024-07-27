@@ -147,6 +147,17 @@ class BankAccount:
         self.AccountBalance -= amount
         print(f"{amount} sent to account {beneficiary}. Your new balance is {self.AccountBalance}")
 
+    def inquiry(self):
+        print("Enter A to check balance.")
+        print("Enter B to check account number.")
+        prompt = input("Enter a prompt: ").capitalize().strip()
+        if prompt == "A":
+            print(f"Hello {self.name}, your current balance is {self.AccountBalance}")
+        elif prompt == "B":
+            print(f"Hello {self.name}, your account number is {self.acctnum}")
+        else:
+            print("Error! Enter a valid prompt.")
+
 
 newact = BankAccount()
 
@@ -165,6 +176,8 @@ while True:
                 newact.withdraw()
             case "send":
                 newact.send_funds()
+            case "inquiry":
+                newact.inquiry()
             case "end" | "close" | "quit":
                 break
             case _:
