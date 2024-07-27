@@ -15,29 +15,33 @@ print("Welcome to the S-Bank")
 
 class BankAccount:
     def __init__(self):
-        self.AccountType = ''
-        self.AccountBalance = 0
+        self.account_type = ''
+        self.account_balance = 0
         self.name = ''
         self.acctnum = None
 
     def login(self):
-        print("A: create account")
-        print("B: login")
-        print("C: exit")
-        prompt = input("Enter an option: ").capitalize()
+        print("A: Create account")
+        print("B: Login")
+        print("C: Exit")
+        prompt = input("Enter an option: ").capitalize().strip()
         if prompt == "B":
             ask = input("Enter your account number: ").strip()
-            with open(filename, "r") as file:
-                read = csv.reader(file)
-                for row in read:
-                    if row[1] == ask:
-                        self.name = row[0]
-                        self.acctnum = int(row[1])
-                        self.AccountBalance = int(row[2])
-                        self.AccountType = row[3]
-                        print(f"Hi {self.name}, Welcome to S-Bank!")
-                        return True
+            try:
+                with open(filename, "r") as file:
+                    reader = csv.reader(file)
+                    for row in reader:
+                        if row[1] == ask:
+                            self.name = row[0]
+                            self.acctnum = int(row[1])
+                            self.account_balance = int(row[2])
+                            self.account_type = row[3]
+                            print(f"Hi {self.name}, Welcome to S-Bank!")
+                            return True
                 print("Account not found!")
+                return False
+            except FileNotFoundError:
+                print("Database file not found!")
                 return False
         elif prompt == "A":
             return "create account"
@@ -53,111 +57,108 @@ class BankAccount:
         print("Enter A for Savings account")
         print("Enter B for Checking account")
 
-        prompt = input("Account type: ").capitalize()
+        prompt = input("Account type: ").capitalize().strip()
 
         if prompt == "A":
-            self.AccountType = "Savings"
+            self.account_type = "Savings"
         elif prompt == "B":
-            self.AccountType = "Checking"
+            self.account_type = "Checking"
         else:
             print("Error! Enter a valid input.")
             return
         
-        print(f"{self.AccountType} account selected!")
+        print(f"{self.account_type} account selected!")
         
-        self.name = input("Enter your name: ")
+        self.name = input("Enter your name: ").strip()
         self.acctnum = random.randint(1000000000, 9999999999)
 
         with open(filename, "a", newline="") as file:
             db = csv.writer(file)
-            db.writerow([self.name, self.acctnum, self.AccountBalance, self.AccountType])
+            db.writerow([self.name, self.acctnum, self.account_balance, self.account_type])
 
         print(f"Hello {self.name}, your account with number: {self.acctnum} has been created successfully!")
     
-    def deposit(self):
-        print(f"Hello {self.name}, how much do you want to deposit?")
-        prompt = int(input("Enter amount: "))
-        self.AccountBalance += prompt
-        
+    def update_account_balance(self):
         rows = []
         with open(filename, "r", newline="") as file:
             reader = csv.reader(file)
             for row in reader:
                 if int(row[1]) == self.acctnum:
-                    row[2] = str(self.AccountBalance)
+                    row[2] = str(self.account_balance)
                 rows.append(row)
         
         with open(filename, "w", newline="") as file:
             db = csv.writer(file)
             db.writerows(rows)
 
-        print(f"{prompt} deposited. Your new balance is {self.AccountBalance}")
+    def deposit(self):
+        try:
+            print(f"Hello {self.name}, how much do you want to deposit?")
+            prompt = int(input("Enter amount: ").strip())
+            self.account_balance += prompt
+            self.update_account_balance()
+            print(f"{prompt} deposited. Your new balance is {self.account_balance}")
+        except ValueError:
+            print("Invalid amount entered.")
 
     def withdraw(self):
-        print(f"Hello {self.name}, how much do you want to withdraw?")
-        prompt = int(input("Enter amount: "))
-        if self.AccountBalance == 0 or self.AccountBalance < prompt:
-            print("Insufficient funds!")
-        else:
-            self.AccountBalance -= prompt
-                    
-        rows = []
-        with open(filename, "r", newline="") as file:
-            reader = csv.reader(file)
-            for row in reader:
-                if int(row[1]) == self.acctnum:
-                    row[2] = str(self.AccountBalance)
-                rows.append(row)
-        
-        with open(filename, "w", newline="") as file:
-            db = csv.writer(file)
-            db.writerows(rows)
-
-        print(f"{prompt} withdrawn. Your new balance is {self.AccountBalance}")
+        try:
+            print(f"Hello {self.name}, how much do you want to withdraw?")
+            prompt = int(input("Enter amount: ").strip())
+            if self.account_balance == 0 or self.account_balance < prompt:
+                print("Insufficient funds!")
+            else:
+                self.account_balance -= prompt
+                self.update_account_balance()
+                print(f"{prompt} withdrawn. Your new balance is {self.account_balance}")
+        except ValueError:
+            print("Invalid amount entered.")
 
     def send_funds(self):
-        beneficiary = input("Enter beneficiary's account number: ").strip()
-        amount = int(input("Enter amount to send: "))
+        try:
+            beneficiary = input("Enter beneficiary's account number: ").strip()
+            amount = int(input("Enter amount to send: ").strip())
 
-        if self.AccountBalance < amount or self.AccountBalance == 0:
-            print("Insufficient funds!")
-            return
+            if self.account_balance < amount or self.account_balance == 0:
+                print("Insufficient funds!")
+                return
 
-        beneficiary_found = False
-        rows = []
+            beneficiary_found = False
+            rows = []
 
-        with open(filename, "r", newline='') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                if row[1] == beneficiary:
-                    row[2] = str(int(row[2]) + amount)  # Add amount to beneficiary's balance
-                    beneficiary_found = True
-                elif row[1] == str(self.acctnum):
-                    row[2] = str(int(row[2]) - amount)  # Deduct amount from sender's balance
-                rows.append(row)
+            with open(filename, "r", newline='') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    if row[1] == beneficiary:
+                        row[2] = str(int(row[2]) + amount)
+                        beneficiary_found = True
+                    elif row[1] == str(self.acctnum):
+                        row[2] = str(int(row[2]) - amount)
+                    rows.append(row)
 
-        if not beneficiary_found:
-            print("Beneficiary account not found!")
-            return
+            if not beneficiary_found:
+                print("Beneficiary account not found!")
+                return
 
-        with open(filename, "w", newline="") as file:
-            db = csv.writer(file)
-            db.writerows(rows)
+            with open(filename, "w", newline="") as file:
+                db = csv.writer(file)
+                db.writerows(rows)
 
-        self.AccountBalance -= amount
-        print(f"{amount} sent to account {beneficiary}. Your new balance is {self.AccountBalance}")
+            self.account_balance -= amount
+            print(f"{amount} sent to account {beneficiary}. Your new balance is {self.account_balance}")
+        except ValueError:
+            print("Invalid amount entered.")
 
     def inquiry(self):
         print("Enter A to check balance.")
         print("Enter B to check account number.")
         prompt = input("Enter a prompt: ").capitalize().strip()
         if prompt == "A":
-            print(f"Hello {self.name}, your current balance is {self.AccountBalance}")
+            print(f"Hello {self.name}, your current balance is {self.account_balance}")
         elif prompt == "B":
             print(f"Hello {self.name}, your account number is {self.acctnum}")
         else:
             print("Error! Enter a valid prompt.")
-
 
 newact = BankAccount()
 
@@ -165,10 +166,10 @@ while True:
     action = newact.login()
     if action == "create account":
         newact.create_account()
-    elif action == None:
+    elif action is None:
         break
     elif action:
-        prompt = input("Enter a prompt: ").lower()
+        prompt = input("Enter a prompt: ").lower().strip()
         match prompt:
             case "deposit":
                 newact.deposit()
