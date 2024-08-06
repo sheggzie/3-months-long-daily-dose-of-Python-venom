@@ -19,6 +19,11 @@ url = 'https://api.covidtracking.com/v1/us/daily.json'
 
 response = requests.get(url)
 
-data = response.json()
+if response.status_code == 200:
+    data = response.json()
+    df = pd.DataFrame(data)
+    xlxs = df.to_excel('covid_report.xlsx', sheet_name='covid report')
+    # print(data)
+else:
+    print(f"Error encountered! {response.status_code}")
 
-print(data)
