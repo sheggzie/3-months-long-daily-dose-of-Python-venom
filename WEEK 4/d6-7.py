@@ -40,6 +40,15 @@ if response.status_code == 200:
     plt.xlabel('Date')
     plt.ylabel('Positive Increase')
     plt.xticks(rotation=45)
+    plt.show()    
+
+    # Daily Increase in Deaths
+    plt.figure(figsize=(14, 7))
+    sbn.lineplot(data=df, x='date', y='deathIncrease')
+    plt.title('Daily Increase in COVID-19 Deaths in the US')
+    plt.xlabel('Date')
+    plt.ylabel('Death Increase')
+    plt.xticks(rotation=45)
     plt.show()
 else:
     print(f"Error encountered! {response.status_code}")
