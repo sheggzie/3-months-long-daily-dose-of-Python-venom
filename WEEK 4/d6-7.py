@@ -20,10 +20,26 @@ url = 'https://api.covidtracking.com/v1/us/daily.json'
 response = requests.get(url)
 
 if response.status_code == 200:
+    # load data into Pandas dataframe
     data = response.json()
     df = pd.DataFrame(data)
-    xlxs = df.to_excel('covid_report.xlsx', sheet_name='covid report')
-    # print(data)
+    
+    # perform basic data operations
+    df['date'] = pd.to_datetime(df['date'], format='%Y%m%d') # convert date int to actual datetime
+    df.set_index('date', inplace=True)    # set date as index
+    df.sort_index(inplace=True) 
+    print(df.head())
+    # xlxs = df.to_excel('covid_report.xlsx', sheet_name='covid report')
+
+    # analyze and visualize data with MatPlotLib and
+    
+    # Daily Increase in Positive Cases
+    plt.figure(figsize=(14, 7))
+    sbn.lineplot(data=df, x='date', y='positiveIncrease')
+    plt.title('Daily Increase in Positive COVID-19 Cases in the US')
+    plt.xlabel('Date')
+    plt.ylabel('Positive Increase')
+    plt.xticks(rotation=45)
+    plt.show()
 else:
     print(f"Error encountered! {response.status_code}")
-
