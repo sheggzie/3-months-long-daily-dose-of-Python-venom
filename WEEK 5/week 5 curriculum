@@ -1,0 +1,63 @@
+Week 5: Advanced Data Manipulation with Pandas and NumPy
+
+Day 1: Advanced Pandas Operations
+
+Concepts:
+MultiIndex and hierarchical indexing
+Reshaping data with stack, unstack, and pivot_table
+Handling time series data in Pandas
+
+Tasks:
+Practice reshaping data using stack and unstack.
+Explore handling time series data (e.g., resampling, shifting).
+
+Example Exercises:
+Manipulate a multi-index DataFrame to perform group operations.
+Resample and analyze time series data (e.g., stock prices).
+
+Day 2: Advanced NumPy Techniques
+
+Concepts:
+Broadcasting in NumPy
+Linear algebra operations (e.g., matrix multiplication)
+Working with large datasets in memory
+Tasks:
+Practice using broadcasting to perform operations on arrays.
+Apply linear algebra techniques to solve problems.
+Example Exercises:
+Use broadcasting to perform element-wise operations on arrays.
+Solve a system of linear equations using NumPy.
+
+Day 3: Merging, Joining, and Concatenating DataFrames
+
+Concepts:
+Different types of joins (inner, outer, left, right)
+Concatenating and appending DataFrames
+Tasks:
+Merge multiple DataFrames based on common columns.
+Practice concatenating DataFrames with different shapes.
+Example Exercises:
+Merge sales and customer data to perform combined analysis.
+Concatenate several small DataFrames into a large one.
+
+Day 4: Pandas Performance Optimization
+
+Concepts:
+Vectorization for speed improvement
+Memory usage optimization
+Tasks:
+Optimize Pandas operations for large datasets.
+Explore memory management techniques in Pandas.
+Example Exercises:
+Optimize a slow Pandas operation using vectorization.
+Reduce memory usage in a large DataFrame by changing data types.
+
+Day 5-7: Project - Complex Data Manipulation
+
+Project Overview:
+Apply advanced Pandas and NumPy techniques to analyze a complex dataset.
+Steps:
+Choose a large dataset that requires extensive data manipulation.
+Clean and preprocess the data, handling any missing or inconsistent values.
+Perform advanced operations like merging, reshaping, and optimizing data processing.
+Analyze the results and present your findings with appropriate visualizations.
